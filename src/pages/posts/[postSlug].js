@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
+import { visit } from 'unist-util-visit';
 
 import postsData from '../../../data/posts.json';
 
@@ -16,8 +17,13 @@ export default function Post({ post }) {
     })
     .use(() => {
       return (tree) => {
-        console.log('tree', tree);
-      }
+        visit(tree, 'element', function (node) {
+          if ( node.tagName === 'h2' ) {
+            console.log('node', node)
+          }
+        });
+        return;
+      };
     })
     .use(rehypeStringify)
     .processSync(post.content)
