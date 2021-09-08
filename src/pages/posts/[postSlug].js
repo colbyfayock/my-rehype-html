@@ -1,11 +1,28 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
+import { unified } from 'unified';
+import rehypeParse from 'rehype-parse';
+import rehypeStringify from 'rehype-stringify';
+
 import postsData from '../../../data/posts.json';
 
 import styles from '../../styles/Home.module.css'
 
 export default function Post({ post }) {
+  const content = unified()
+    .use(rehypeParse, {
+      fragment: true,
+    })
+    .use(() => {
+      return (tree) => {
+        console.log('tree', tree);
+      }
+    })
+    .use(rehypeStringify)
+    .processSync(post.content)
+    .toString();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -21,7 +38,7 @@ export default function Post({ post }) {
 
         <div className={styles.grid}>
           <div className={styles.content} dangerouslySetInnerHTML={{
-            __html: post.content
+            __html: content
           }} />
         </div>
 
