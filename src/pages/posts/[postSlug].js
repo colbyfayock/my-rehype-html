@@ -12,6 +12,8 @@ import postsData from '../../../data/posts.json';
 import styles from '../../styles/Home.module.css'
 
 export default function Post({ post }) {
+  const toc = [];
+
   const content = unified()
     .use(rehypeParse, {
       fragment: true,
@@ -22,6 +24,11 @@ export default function Post({ post }) {
           if ( node.tagName === 'h2' ) {
             const id = parameterize(node.children[0].value);
             node.properties.id = id;
+
+            toc.push({
+              id,
+              title: node.children[0].value,
+            });
           }
         });
         return;
@@ -43,6 +50,18 @@ export default function Post({ post }) {
         <h1 className={styles.title}>
           { post.title }
         </h1>
+
+        <ul>
+          {toc.map(({ id, title}) => {
+            return (
+              <li key={id}>
+                <a href={`#${id}`}>
+                  { title }
+                </a>
+              </li>
+            )
+          })}
+        </ul>
 
         <div className={styles.grid}>
           <div className={styles.content} dangerouslySetInnerHTML={{
