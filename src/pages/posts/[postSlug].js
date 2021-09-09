@@ -24,10 +24,22 @@ export default function Post({ post }) {
           if ( node.tagName === 'h2' ) {
             const id = parameterize(node.children[0].value);
             node.properties.id = id;
+            node.properties.class = node.properties.class ? `${node.properties.class} ${styles.header}` : styles.header;
 
             toc.push({
               id,
               title: node.children[0].value,
+            });
+
+            node.children.unshift({
+              type: 'element',
+              properties: {
+                href: `#${id}`,
+                class: styles.anchor,
+                'aria-hidden': 'true'
+              },
+              tagName: 'a',
+              type: 'element'
             });
           }
         });

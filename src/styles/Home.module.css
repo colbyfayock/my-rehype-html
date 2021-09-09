@@ -119,3 +119,23 @@
   border-top: solid 1px lightgray;
   margin-top: 2em;
 }
+
+.header:hover .anchor {
+  visibility: visible;
+}
+
+.anchor {
+  float: left;
+  margin-left: -30px;
+  padding-right: 8px;
+}
+
+.anchor:before {
+  visibility: hidden;
+  color: gray;
+  content: '#'
+}
+
+.header:hover .anchor:before {
+  visibility: visible;
+}
