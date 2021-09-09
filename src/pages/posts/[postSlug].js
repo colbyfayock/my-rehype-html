@@ -5,6 +5,7 @@ import { unified } from 'unified';
 import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
+import parameterize from 'parameterize';
 
 import postsData from '../../../data/posts.json';
 
@@ -19,7 +20,8 @@ export default function Post({ post }) {
       return (tree) => {
         visit(tree, 'element', function (node) {
           if ( node.tagName === 'h2' ) {
-            console.log('node', node)
+            const id = parameterize(node.children[0].value);
+            node.properties.id = id;
           }
         });
         return;
