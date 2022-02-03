@@ -2,6 +2,8 @@
 
 Demo for tutorial [How to Add a Dynamic Table of Contents to Static HTML in React with Rehype](https://www.youtube.com/watch?v=LFNMs8iEgXM)
 
+🚀 See Demo: https://my-rehype-html.netlify.app/
+
 📝 Article: https://spacejelly.dev/posts/how-to-add-a-dynamic-table-of-contents-to-static-html-in-react-with-rehype/
 
 📺 YouTube: https://www.youtube.com/watch?v=LFNMs8iEgXM
